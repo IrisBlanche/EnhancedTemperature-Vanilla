@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_toxic", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

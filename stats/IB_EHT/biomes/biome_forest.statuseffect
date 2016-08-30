@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_forest", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

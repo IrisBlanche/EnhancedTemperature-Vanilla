@@ -1,0 +1,10 @@
+{
+  "name" : "status_hyper0",
+  "effectConfig" : {},
+  "defaultDuration" : 3,
+  "label" : "Hyperthermia Level 0",
+  "icon" : "/interface/statuses/status_hyper0.png",
+  "scripts" : [  ]
+}
+
+

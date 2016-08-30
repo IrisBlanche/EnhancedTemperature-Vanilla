@@ -1,0 +1,10 @@
+{
+  "name" : "status_hypo0",
+  "effectConfig" : {},
+  "defaultDuration" : 3,
+  "label" : "Hypothermia Level 0",
+  "icon" : "/interface/statuses/status_hypo0.png",
+  "scripts" : [  ]
+}
+
+

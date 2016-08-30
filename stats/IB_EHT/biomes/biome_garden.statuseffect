@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_garden", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

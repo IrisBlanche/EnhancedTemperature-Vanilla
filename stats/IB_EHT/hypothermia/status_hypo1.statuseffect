@@ -1,0 +1,12 @@
+{
+	"name" : "status_hypo1",
+	"effectConfig" : {
+		"tickRate" : 20,
+		"energyCost" : 0,
+		"healthDamage" : 0
+	},
+	"defaultDuration" : 3,
+	"label" : "Hypothermia Level 1",
+	"icon" : "/interface/statuses/status_hypo1.png",
+	"scripts" : [ "hypothermia.lua" ]
+}

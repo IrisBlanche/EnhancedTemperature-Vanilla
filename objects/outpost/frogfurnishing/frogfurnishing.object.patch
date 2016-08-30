@@ -1,0 +1,7 @@
+[
+	{"op" : "add", "path" : "/storeInventory/furniture/-", "value" : "bunkerheater1"},
+	{"op" : "add", "path" : "/storeInventory/furniture/-", "value" : "bunkervent"},
+	{"op" : "add", "path" : "/storeInventory/furniture/-", "value" : "vent"},
+	{"op" : "add", "path" : "/storeInventory/furniture/-", "value" : "barvent"},
+	{"op" : "add", "path" : "/storeInventory/furniture/-", "value" : "roofvent"}
+]
