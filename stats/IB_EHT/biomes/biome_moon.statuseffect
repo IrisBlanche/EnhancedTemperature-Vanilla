@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_moon", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

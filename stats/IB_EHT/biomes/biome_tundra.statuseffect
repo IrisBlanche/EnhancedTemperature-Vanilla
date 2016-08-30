@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_tundra", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

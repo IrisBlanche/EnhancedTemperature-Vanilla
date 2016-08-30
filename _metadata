@@ -1,0 +1,11 @@
+{
+  "author" : "Iris Blanche",
+  "description" : "This brings back the temperature system.\n\n~ Iris ~",
+  "friendlyName" : "^green;EnhancedTemperature",
+  "link" : "steam://url/CommunityFilePage/754276836",
+  "name" : "EnhancedTemperature",
+  "path" : ".",
+  "priority" : 80000,
+  "steamContentId" : "754276836",
+  "version" : "1.1.3"
+}

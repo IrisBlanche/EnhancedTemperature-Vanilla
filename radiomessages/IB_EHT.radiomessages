@@ -1,0 +1,42 @@
+{
+  "exposure_25" : {
+    "unique" : false,
+    "text" : "Your hypothermia level increased to a deadly level. Get out of there quickly!"
+  },
+
+  "exposure_50" : {
+    "unique" : false,
+    "text" : "Your hypothermia level increased to a dangerous level. Find a warm place!"
+  },
+  
+  "exposure_75" : {
+    "unique" : false,
+    "text" : "Your hypothermia level slightly increased. Be careful because it can quickly get a problem."
+  },
+  
+  "exposure_125" : {
+    "unique" : false,
+    "text" : "Your hyperthermia level slightly increased. If you stay cool there is no problem."
+  },
+  
+  "exposure_150" : {
+    "unique" : false,
+    "text" : "Your hyperthermia level increased to a dangerous level. Find some water to cool down."
+  },
+  
+  "exposure_175" : {
+    "unique" : false,
+    "text" : "Your hyperthermia level increased to a deadly level. Get out of there quickly!"
+  },
+  
+  "eht_change" : {
+    "unique" : false,
+    "text" : "EHT config successfully changed!"
+  },
+  
+  "eht_nochange" : {
+    "unique" : false,
+    "text" : "EHT config could not be changed!"
+  }
+  
+}

@@ -1,0 +1,27 @@
+{
+  "id" : "IB_EHT",
+  "mainQuest" : true,
+  "invisible" : false,
+  "logOnly" : false,
+  "title" : "---",
+  "text" : "---",
+  "completionText" : "---",
+  "moneyRange" : [0, 0],
+  "rewards" : [
+    [ ]
+  ],
+  "canBeAbandoned" : false,
+  "updateDelta" : 150,
+  "script" : "/quests/IB_EHT/IB_EHT.lua",
+  "scriptConfig" : {
+	"portraits" : {
+      "default" : "player"
+    },
+	
+	"descriptions" : {
+      "showInfo" : "Initialzing status tracker..."
+    },
+	"title" : "^orange;EnhancedTemperature^white;",
+	"text" : "The conditions on planets can be very lethal when it comes to hypothermia and hyperthermia.\n\nI can track my exposure status here."
+  }
+}

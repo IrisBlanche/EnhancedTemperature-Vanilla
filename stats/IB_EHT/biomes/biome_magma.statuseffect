@@ -1,0 +1,6 @@
+{ 
+  "name" : "biome_magma", 
+  "effectConfig" : {}, 
+  "defaultDuration" : 3, 
+  "scripts" : [ ] 
+} 

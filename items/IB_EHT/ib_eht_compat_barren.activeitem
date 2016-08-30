@@ -1,0 +1,13 @@
+{ 
+  "itemName" : "ib_eht_compat_barren", 
+  "inventoryIcon" : "ib_eht_compat.png", 
+  "description" : "EHT Import for Barren biome. ^red;IMPROPER USE WILL CAUSE WRONG TEMPERATURES!^white;", 
+  "shortdescription" : "^green;EHT Import - Barren^white;", 
+  "price" : 0, 
+  "rarity" : "Legendary", 
+  "maxStack" : 1, 
+  "twoHanded" : false, 
+ 
+  "scripts" : ["/scripts/ib_eht/import.lua"], 
+  "EHTBiome" : "biome_barren" 
+} 

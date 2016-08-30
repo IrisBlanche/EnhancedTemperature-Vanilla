@@ -1,0 +1,4 @@
+[
+	{"op" : "add", "path" : "/scripts/-", "value" : "/scripts/IB_EHT/torch_addon.lua"},
+	{"op" : "add", "path" : "/provideWarmth", "value" : true}
+]
