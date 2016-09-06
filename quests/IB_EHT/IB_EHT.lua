@@ -31,6 +31,7 @@ function init()
 	
 	-- Storage
 	storage.complete = storage.complete or false
+	storage.tick = storage.tick or 0
 	
 	-- Quest description
 	self.descriptions = config.getParameter("descriptions")
@@ -126,8 +127,13 @@ function update(dt)
 	-- Temperature
 	local temperature = self.EHT:CalculateTemperature()
 	
-	-- Modifier
-	local modifier = self.EHT:CalculateModifier(temperature)
+	-- Modifier with own tickrate
+	if storage.tick == 2 then
+		self.EHT:CalculateModifier(temperature)
+		storage.tick = 0
+	else
+		storage.tick = storage.tick + 1
+	end
 	
 	-- Show information about current exposure level
 	self.EHT:ShowMessage(modifier)
