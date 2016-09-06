@@ -52,17 +52,17 @@ Effects: none
 
 ^orange;Hyperthermia Level 1^white;
 Exposurelevel: between 25 and 50 
-Effects: no energy restore, Hyperthermia +25%
+Effects: no energy restore, Hyperthermia +10%
 
 ^orange;Hyperthermia Level 2^white;
 Exposurelevel: between 50 and 75
-Effects: slight energy drain, Hyperthermia +35%",
+Effects: slight energy drain, Hyperthermia +25%",
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 "^cyan; * The status effects^white;
 
 ^orange;Hyperthermia Level 3^white;
 Exposurelevel: between 75 and 100
-Effects: moderate energy drain, moderate health drain, Hyperthermia +35%
+Effects: moderate energy drain, moderate health drain, Hyperthermia +25%
 ^red;This effect is lethal!
 
 It should be avoided to get this one!",
@@ -75,17 +75,17 @@ Effects: none
 
 ^orange;Hypothermia Level 1^white;
 Exposurelevel: between -25 and -50 
-Effects: no energy restore, Hypothermia +25%
+Effects: no energy restore, Hypothermia +10%
 
 ^orange;Hypothermia Level 2^white;
 Exposurelevel: between -50 and -75
-Effects: slight energy drain, slower movement, Hypothermia +35%",
+Effects: slight energy drain, slower movement, Hypothermia +25%",
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 "^cyan; * The status effects^white;
 
 ^orange;Hypothermia Level 3^white;
 Exposurelevel: between -75 and -100
-Effects: moderate energy drain, moderate health drain, slow movement, Hypothermia +35%
+Effects: moderate energy drain, moderate health drain, slow movement, Hypothermia +25%
 ^red;This effect is lethal!
 
 It should be avoided to get this one!",

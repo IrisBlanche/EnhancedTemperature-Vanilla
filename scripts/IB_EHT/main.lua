@@ -518,15 +518,15 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Hypothermia
 	if Util:between(exposure, 50, 74.9) then
-		targetexposure = targetexposure * 0.75
+		targetexposure = targetexposure * 0.9
 	elseif Util:between(exposure, 0, 49.9) then
-		targetexposure = targetexposure * 0.65
+		targetexposure = targetexposure * 0.75
 		
 	-- Hyperthermia
 	elseif Util:between(exposure, 125.1, 150) then
-		targetexposure = targetexposure * 1.25
+		targetexposure = targetexposure * 1.1
 	elseif Util:between(exposure, 150.1, 200) then
-		targetexposure = targetexposure * 1.35
+		targetexposure = targetexposure * 1.25
 	end
 	
 	
@@ -639,12 +639,12 @@ function EHT:CalculateModifier(temperature)
 	local modifier = self:modHelper(exposure, targetexposure, factor)
 	
 	-- When heat protection then hyperthermia increases slower
-	if(status.stat("biomeheatImmunity") == 1.0) and modifier > 0.0 and exposure > 125 then
+	if(status.stat("biomeheatImmunity") == 1.0) and modifier > 0.0 and exposure >= 100 then
 		modifier = modifier * 0.5
 	end
 	
 	-- When cold protection hypothermia increases slower
-	if(status.stat("biomecoldImmunity") == 1.0) and modifier < 0.0 and exposure < 100 then
+	if(status.stat("biomecoldImmunity") == 1.0) and modifier < 0.0 and exposure <= 100 then
 		modifier = modifier * 0.5
 	end
 	
