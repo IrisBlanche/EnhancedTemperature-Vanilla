@@ -511,8 +511,8 @@ function EHT:CalculateModifier(temperature)
 	-- Is liquid?
 	local isLiquid = false
 	
-	-- calculate factor
-	local factor,_ = math.modf(math.abs(temperature / 10))
+	-- set factor
+	local factor = 1
 	
 	-- set higher targetexposure dependent on current level
 	
@@ -576,7 +576,7 @@ function EHT:CalculateModifier(temperature)
 				if liq == nil and isVisible then -- if the vent is in liquid it won't work, also we have to see it
 					targetexposure = 115
 					isHybrid = true
-					factor = 3
+					factor = 2 -- faster rate for hybrid sources
 					break -- we have a vent outside of liquid
 				end
 			end
@@ -616,7 +616,7 @@ function EHT:CalculateModifier(temperature)
 						
 						-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
 						heatchange = heatchange + tmp
-						factor = factor + 1
+						factor = 2 -- faster rate for heat sources
 						
 					end
 					-- we need to run through all heat sources to get the current modified warmth in range
@@ -626,13 +626,6 @@ function EHT:CalculateModifier(temperature)
 		
 		-- apply heatchange
 		targetexposure = targetexposure + heatchange
-	end
-	
-	-- set min/max
-	if factor < 1 then
-		factor = 1
-	elseif factor > 5 then
-		factor = 5
 	end
 	
 	-- calculate modifier
