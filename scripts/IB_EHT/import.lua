@@ -30,7 +30,15 @@ end
 -- The EHT import magic
 -- #########################################################################################################
 function activate(fireMode, shiftHeld)
-	if world.getProperty("eht.biome", nil) == nil and fireMode == "primary" then
+	
+	local prop = world.getProperty("eht.biome", nil)
+	
+	-- wrong status effect (1.1.4)
+	if prop == "biome_svannah" then
+		prop = nil
+	end
+	
+	if prop == nil and fireMode == "primary" then
 		world.sendEntityMessage( activeItem.ownerEntityId(), "checkEHT", { biome = config.getParameter("EHTBiome"), success = true, item = item.descriptor() })
 	else
 		world.sendEntityMessage( activeItem.ownerEntityId(), "checkEHT", { biome = config.getParameter("EHTBiome"), success = false, item = item.descriptor() })
