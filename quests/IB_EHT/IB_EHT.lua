@@ -129,14 +129,13 @@ function update(dt)
 	
 	-- Modifier with own tickrate
 	if storage.tick == 2 then
-		self.EHT:CalculateModifier(temperature)
+		local modifier = self.EHT:CalculateModifier(temperature)
+		-- Show information about current exposure level
+		self.EHT:ShowMessage(modifier)
 		storage.tick = 0
 	else
 		storage.tick = storage.tick + 1
 	end
-	
-	-- Show information about current exposure level
-	self.EHT:ShowMessage(modifier)
 	
 	-- Update quest tracker for keeping the information about the actual status "up to date"
 	quest.setObjectiveList({
