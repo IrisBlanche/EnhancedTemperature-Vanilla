@@ -51,9 +51,6 @@ function EHT.create()
 	data.hasStarterEffect = false
 	data.oldid = "NA"
 	
-	-- Init message
-	sb.logInfo("[EHT] System initialized")
-	
 	message.setHandler("getCallback", function(_,_,value)
 		data.callback = value
 	end)
@@ -100,7 +97,8 @@ function EHT:IsInBiome(biome)
 	
 	if b == nil then
 		-- property not set, get the mainbiome
-		local wt = world.type()
+		local wt = "biome_" .. world.type()
+		sb.logInfo("biome_type: " .. wt)
 		if wt == biome then
 			world.setProperty("eht.biome", wt)
 			return true
