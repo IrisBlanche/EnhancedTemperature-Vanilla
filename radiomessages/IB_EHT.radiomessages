@@ -27,16 +27,6 @@
   "exposure_175" : {
     "unique" : false,
     "text" : "Your hyperthermia level increased to a deadly level. Get out of there quickly!"
-  },
-  
-  "eht_change" : {
-    "unique" : false,
-    "text" : "EHT config successfully changed!"
-  },
-  
-  "eht_nochange" : {
-    "unique" : false,
-    "text" : "EHT config could not be changed!"
   }
   
 }
