@@ -99,13 +99,11 @@ function EHT:IsInBiome(biome)
 	local b = world.getProperty("eht.biome", nil)
 	
 	if b == nil then
-		-- no property set, scan for biome through effect if property not set
-		for i, v in ipairs (status.getPersistentEffects("environment")) do
-			if v == biome then
-				-- Biome found, set property
-				world.setProperty("eht.biome", biome)
-				return true
-			end
+		-- property not set, get the mainbiome
+		local wt = world.type()
+		if wt == biome then
+			world.setProperty("eht.biome", wt)
+			return true
 		end
 	else
 		-- property set, check if same biome
