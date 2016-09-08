@@ -20,9 +20,9 @@
 -- additonal scripts
 -- #########################################################################################################
 require "/scripts/util.lua"
-require "/quests/scripts/portraits.lua"
 require "/scripts/messageutil.lua"
 require "/scripts/IB_EHT/main.lua"
+require "/quests/scripts/portraits.lua"
 
 -- #########################################################################################################
 -- Initialize EHT
@@ -53,11 +53,6 @@ function init()
 	quest.setObjectiveList({
 		{self.descriptions.showInfo, false}
 	})
-	
-	-- set EHT handler
-	message.setHandler("checkEHT", function(_,_,data)
-		checkEHT(data)
-	end)
 end
 
 -- #########################################################################################################
@@ -65,27 +60,6 @@ end
 -- #########################################################################################################
 function uninit()
 	saveData()
-end
--- #########################################################################################################
--- EHT Message handler for compatibility
--- #########################################################################################################
-function checkEHT(data)
-	local dialogConfig = root.assetJson("/interface/ib_eht/compatconfirm.config")
-	
-	dialogConfig.message = dialogConfig.message .. "^green;" .. ( data.biome:gsub("biome_", "") ):gsub("^%l", string.upper) .. "^white;"
-	
-	if data.success then
-		promises:add(player.confirm(dialogConfig), function(r)
-			if r then
-				sb.logInfo(string.format("Changed EHT config on %s to %s", player.worldId(), data.biome))
-				world.setProperty("eht.biome", data.biome)
-				player.radioMessage("eht_change")
-				player.consumeItem(data.item)
-			end
-		end)
-	else
-		player.radioMessage("eht_nochange")
-	end
 end
 
 -- #########################################################################################################
@@ -128,10 +102,8 @@ function update(dt)
 	local temperature = self.EHT:CalculateTemperature()
 	
 	-- Modifier with own tickrate
-	if storage.tick == 2 then
-		local modifier = self.EHT:CalculateModifier(temperature)
-		-- Show information about current exposure level
-		self.EHT:ShowMessage(modifier)
+	if storage.tick == config.getParameter("exposureTick") then
+		self.EHT:ShowMessage(self.EHT:CalculateModifier(temperature))
 		storage.tick = 0
 	else
 		storage.tick = storage.tick + 1
