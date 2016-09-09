@@ -546,7 +546,31 @@ function EHT:CalculateModifier(temperature)
 		local it = player.equippedItem(v.slot)
 		if it ~= nil then
 			if it.name == v.type then
-				targetexposure = targetexposure + v.mod
+				local pass = true
+				if v.needStatus ~= false then
+					pass = self.hasEffect(v.needStatus)
+				end
+				
+				if pass then
+					-- Hypothermia protection
+					if v.protection.type == "hypo" then
+						targetexposure = targetexposure + v.protection.value
+					end
+					
+					-- Hyperthermia protection
+					if v.protection.type == "hyper" then
+						targetexposure = targetexposure - v.protection.value
+					end
+					
+					-- Hybrid protection
+					if v.protection.type == "hybrid" then
+						if targetexposure >= 125 then
+							targetexposure = targetexposure - v.protection.value
+						elseif targetexposure <= 75 then
+							targetexposure = targetexposure + v.protection.value
+						end
+					end
+				end
 			end
 		end
 	end
