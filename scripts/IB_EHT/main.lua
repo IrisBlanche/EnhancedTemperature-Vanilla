@@ -55,13 +55,24 @@ function EHT.create()
 end
 
 -- #########################################################################################################
--- Apply starter effect
+-- Apply starter effect when first installed or on death
 -- #########################################################################################################
 function EHT:applyStarterEffect()
-	if not self.hasStarterEffect then
+	if not self.hasStarterEffect or self:noEffects() then
 		status.addEphemeralEffect(self.config.exposure.effects.hyper0, math.huge)
 		self.hasStarterEffect = true
 	end
+end
+
+-- #########################################################################################################
+-- Status check for death handler
+-- #########################################################################################################
+function EHT:noEffects()
+	local ret = false
+	for k, v in ipairs (self.config.exposure.effects) do
+		ret = ret or EHT:hasEffect(v)
+	end
+	return ret
 end
 
 -- #########################################################################################################
