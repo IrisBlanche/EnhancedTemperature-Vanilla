@@ -115,7 +115,9 @@ function update(dt)
 	})
 	
 	-- Display debug
-	sb.setLogMap("Biome: ", "%s", world.type())
+	local wtime = storage.EHT.FormatTime()
+	sb.setLogMap("Current world type", "%s", world.type())
+	sb.setLogMap("Current world time", "%.0f:%.0f", wtime.hour, wtime.minute60)
 	
 	-- Save data
 	saveData()
