@@ -59,6 +59,15 @@ end
 function EHT:applyStarterEffect()
 	if self:noEffects() then
 		status.addEphemeralEffect(self.config.exposure.effects.hyper0, math.huge)
+		self.lvlFlag = {
+			hypo3 = false,
+			hypo2 = false,
+			hypo1 = false,
+			switch = false,
+			hyper1 = false,
+			hyper2 = false,
+			hyper3 = false
+		}
 	end
 end
 
@@ -67,9 +76,9 @@ end
 -- #########################################################################################################
 function EHT:noEffects()
 	local ret = false
-	for k, v in ipairs (self.config.exposure.effects) do
-		sb.logInfo(string.format("Check effect: %s : %s", k, v))
-		if EHT:hasEffect(v) then
+	local effects = {"hypo3","hypo2","hypo1","hypo0","hyper0","hyper1","hyper2","hyper3"}
+	for _, v in ipairs (effects) do
+		if self:hasEffect(self.config.exposure.effects[v]) then
 			return false
 		end
 	end
@@ -126,8 +135,10 @@ end
 -- #########################################################################################################
 function EHT:hasEffect(effect)
 	-- Scan for effect
-	for i, v in ipairs (status.activeUniqueStatusEffectSummary()) do
-		if v.effect == effect then
+	local status = status.activeUniqueStatusEffectSummary()
+	
+	for i, v in ipairs (status) do
+		if v[1] == effect then
 			-- effect found
 			return true
 		end
