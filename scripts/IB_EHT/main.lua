@@ -48,7 +48,6 @@ function EHT.create()
 	data.DayFlag = 6
 	data.offset = 0
 	data.transition = 4
-	data.hasStarterEffect = false
 	data.oldid = "NA"
 	
 	return data
@@ -58,9 +57,8 @@ end
 -- Apply starter effect when first installed or on death
 -- #########################################################################################################
 function EHT:applyStarterEffect()
-	if not self.hasStarterEffect or self:noEffects() then
+	if self:noEffects() then
 		status.addEphemeralEffect(self.config.exposure.effects.hyper0, math.huge)
-		self.hasStarterEffect = true
 	end
 end
 
@@ -70,6 +68,7 @@ end
 function EHT:noEffects()
 	local ret = false
 	for k, v in ipairs (self.config.exposure.effects) do
+		sb.logInfo(string.format("Check effect: %s : %s", k, v))
 		if EHT:hasEffect(v) then
 			return false
 		end
