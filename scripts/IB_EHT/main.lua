@@ -195,7 +195,7 @@ function EHT:CalculateTemperature()
 			local wind = math.abs(world.windLevel(entity.position())) / 10
 			
 			-- get planetlayers
-			local layers = world.getProperty("world.layers", nil)
+			local layers = world.getProperty("eht.layers", nil)
 			
 			if layers == nil then
 				layers = self:getLayers()
@@ -397,12 +397,19 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 end
 
 -- #########################################################################################################
--- Get the planet layers
+-- Get the current planet size
+-- #########################################################################################################
+function EHT:getPlanetSize()
+	return world.xwrap(-10000) + world.xwrap(10000)
+end
+
+-- #########################################################################################################
+-- Get the current planet layers
 -- #########################################################################################################
 function EHT:getLayers()
 	-- do not perform the check when we're on our ship
 	if player.worldId() == player.ownShipWorldId() then
-		world.setProperty("world.layers", { shipworld = true })
+		world.setProperty("eht.layers", { shipworld = true })
 		world.setProperty("eht.biome", "shipworld")
 		return { shipworld = true }
 	end
@@ -411,12 +418,12 @@ function EHT:getLayers()
 	local planetSizes = root.assetJson("/terrestrial_worlds.config:planetSizes")
 	
 	-- get xwrap of this world
-	local size = world.xwrap(999999)
+	local size = self:getPlanetSize()
 	
 	-- get associated world
 	for k,v in pairs(planetSizes) do
-		if v.size[1] == size + 1 then
-			world.setProperty("world.layers", v.layers)
+		if v.size[1] == size then
+			world.setProperty("eht.layers", v.layers)
 			return v.layers
 		end
 	end
