@@ -117,7 +117,6 @@ function update(dt)
 	-- Display debug
 	local wtime = self.EHT:FormatTime()
 	sb.setLogMap("Current world type", "%s", world.type())
-	sb.setLogMap("Current world time", "%.0f:%.0f", wtime.hour, wtime.minute60)
 	
 	-- Save data
 	saveData()
