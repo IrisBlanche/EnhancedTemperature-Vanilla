@@ -70,9 +70,11 @@ end
 function EHT:noEffects()
 	local ret = false
 	for k, v in ipairs (self.config.exposure.effects) do
-		ret = ret or EHT:hasEffect(v)
+		if EHT:hasEffect(v) then
+			return false
+		end
 	end
-	return ret
+	return true
 end
 
 -- #########################################################################################################
