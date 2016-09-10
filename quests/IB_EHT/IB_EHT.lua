@@ -53,6 +53,8 @@ function init()
 	quest.setObjectiveList({
 		{self.descriptions.showInfo, false}
 	})
+	
+	sb.logInfo("EHT initialized")
 end
 
 -- #########################################################################################################
@@ -96,8 +98,6 @@ end
 -- #########################################################################################################
 function update(dt)
 	
-	promises:update()
-	
 	-- Temperature
 	local temperature = self.EHT:CalculateTemperature()
 	
@@ -113,6 +113,9 @@ function update(dt)
 	quest.setObjectiveList({
 		{"Exposure: " .. string.format("%.0f", status.resource("exposure") - 100 ) .. "\n- Current Temp: " ..  string.format("%.1f", temperature) .. " C", false}
 	})
+	
+	-- Display debug
+	sb.setLogMap("Biome: ", "%s", world.type())
 	
 	-- Save data
 	saveData()
