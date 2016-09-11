@@ -110,13 +110,13 @@ end
 -- #########################################################################################################
 function EHT:IsInBiome(biome)
 	-- check if property already set
-	local b = world.getProperty("eht.biome", nil)
+	local b = world.getProperty("eht_biome", nil)
 	
 	if b == nil then
 		-- property not set, get the mainbiome
-		local wt = "biome_" .. world.type()
+		local wt = world.type()
 		if wt == biome then
-			world.setProperty("eht.biome", wt)
+			world.setProperty("eht_biome", wt)
 			return true
 		end
 	else
@@ -206,7 +206,7 @@ function EHT:CalculateTemperature()
 			local wind = math.abs(world.windLevel(entity.position())) / 10
 			
 			-- get planetlayers
-			local layers = world.getProperty("eht.layers", nil)
+			local layers = world.getProperty("eht_layers", nil)
 			
 			if layers == nil then
 				layers = self:getLayers()
@@ -420,8 +420,8 @@ end
 function EHT:getLayers()
 	-- do not perform the check when we're on our ship
 	if player.worldId() == player.ownShipWorldId() then
-		world.setProperty("eht.layers", { shipworld = true })
-		world.setProperty("eht.biome", "shipworld")
+		world.setProperty("eht_layers", { shipworld = true })
+		world.setProperty("eht_biome", "shipworld")
 		return { shipworld = true }
 	end
 	
@@ -434,7 +434,7 @@ function EHT:getLayers()
 	-- get associated world
 	for k,v in pairs(planetSizes) do
 		if v.size[1] == size then
-			world.setProperty("eht.layers", v.layers)
+			world.setProperty("eht_layers", v.layers)
 			return v.layers
 		end
 	end
