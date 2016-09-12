@@ -106,32 +106,32 @@ function EHT:switchEffects(from, to)
 end
 
 -- #########################################################################################################
--- Is the player in the biome?
+-- Is the player on the planet?
 -- #########################################################################################################
-function EHT:IsInBiome(biome)
+function EHT:IsOnPlanet(planettype)
 	-- check if property already set
-	local b = world.getProperty("eht_biome", nil)
+	local p = world.getProperty("eht_planet", nil)
 	
-	if b == nil then
-		-- property not set, get the mainbiome
-		local wt = world.type()
-		if wt == biome then
-			world.setProperty("eht_biome", wt)
+	if p == nil then
+		-- property not set, get the mainplanettype
+		local pt = world.type()
+		if pt == planettype then
+			world.setProperty("eht_planet", pt)
 			return true
 		end
 	else
-		-- property set, check if same biome
-		if b == biome then
+		-- property set, check if same planettype
+		if p == planettype then
 			return true
 		end
 	end
 	
-	-- Biome not found
+	-- planettype not found
 	return false
 end
 
 -- #########################################################################################################
--- Is the player in the biome?
+-- Does the player has the effect?
 -- #########################################################################################################
 function EHT:hasEffect(effect)
 	-- Scan for effect
@@ -174,7 +174,7 @@ function EHT:FormatTime()
 end
 
 -- #########################################################################################################
--- Calculate temperature based on biome, wind and time
+-- Calculate temperature based on planettype, wind and time
 -- #########################################################################################################
 function EHT:CalculateTemperature()
 	
@@ -189,17 +189,17 @@ function EHT:CalculateTemperature()
 	else
 		-- Temperature table with standard skipCheck
 		local temp = {
-			skipCheck = true -- should the biome be skipped in calculation?
+			skipCheck = true -- should the planettype be skipped in calculation?
 		}
 		
-		-- Get temperature based on biome environmental status
+		-- Get temperature based on planettype environmental status
 		for k,v in pairs(self.config.planetTypes) do
-			if self:IsInBiome(k) then
+			if self:IsOnPlanet(k) then
 				temp = v
 			end
 		end
 		
-		-- Only apply additional calculation when the biome is not marked for skip
+		-- Only apply additional calculation when the planettype is not marked for skip
 		if not temp.skipCheck then
 			
 			-- Get windlevel
@@ -421,7 +421,7 @@ function EHT:getLayers()
 	-- do not perform the check when we're on our ship
 	if player.worldId() == player.ownShipWorldId() then
 		world.setProperty("eht_layers", { shipworld = true })
-		world.setProperty("eht_biome", "shipworld")
+		world.setProperty("eht_planet", "shipworld")
 		return { shipworld = true }
 	end
 	
