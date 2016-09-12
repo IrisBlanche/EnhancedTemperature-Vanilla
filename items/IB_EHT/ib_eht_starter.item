@@ -6,7 +6,7 @@
   "shortdescription" : "^green;EHT - Starter^white;",
   "price" : 0,
   "category" : "quest",
-  
+
   "pickupQuestTemplates" : ["IB_EHT"],
   "consumeOnPickup" : true
 }

@@ -408,13 +408,6 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 end
 
 -- #########################################################################################################
--- Get the current planet size
--- #########################################################################################################
-function EHT:getPlanetSize()
-	return world.xwrap(-10000) + world.xwrap(10000)
-end
-
--- #########################################################################################################
 -- Get the current planet layers
 -- #########################################################################################################
 function EHT:getLayers()
@@ -429,7 +422,7 @@ function EHT:getLayers()
 	local planetSizes = root.assetJson("/terrestrial_worlds.config:planetSizes")
 	
 	-- get xwrap of this world
-	local size = self:getPlanetSize()
+	local size = Util:getPlanetSize()
 	
 	-- get associated world
 	for k,v in pairs(planetSizes) do
