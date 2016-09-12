@@ -514,10 +514,6 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Target exposure based on temperature
 	local targetexposure = 90 + ( temperature * 0.67 )
-
-	if targetexposure < 0 then
-		targetexposure = 0
-	end
 	
 	-- Is hybrid?
 	local isHybrid = false
@@ -552,7 +548,18 @@ function EHT:CalculateModifier(temperature)
 			targetexposure = targetexposure - 3
 		end
 	end
-	
+
+	-- Apply special status effects
+    for _,v in pairs(self.config.status) do
+        if self.hasEffect(v.effect) then
+            if v.type == "hypo" then
+                targetexposure = targetexposure + v.value
+            elseif v.type == "hyper" then
+                targetexposure = targetexposure - v.value
+            end
+        end
+    end
+
 	-- Apply equip stats
 	for _,v in pairs(self.config.equip) do
 		local it = player.equippedItem(v.slot)
@@ -661,7 +668,14 @@ function EHT:CalculateModifier(temperature)
 		-- apply heatchange
 		targetexposure = targetexposure + heatchange
 	end
-	
+
+    -- Targetexposure limit
+    if targetexposure < 0 then
+        targetexposure = 0
+    elseif targetexposure > 200 then
+        targetexposure = 200
+    end
+
 	-- calculate modifier
 	local modifier = self:modHelper(exposure, targetexposure, factor)
 	
