@@ -513,7 +513,7 @@ function EHT:CalculateModifier(temperature)
 	local exposure = status.resource("exposure")
 	
 	-- Target exposure based on temperature
-	local targetexposure = 90 + temperature
+	local targetexposure = 90 + ( temperature * 0.67 )
 
 	if targetexposure < 0 then
 		targetexposure = 0
@@ -567,15 +567,11 @@ function EHT:CalculateModifier(temperature)
 					-- Hypothermia protection
 					if v.protection.type == "hypo" then
 						targetexposure = targetexposure + v.protection.value
-					end
-					
 					-- Hyperthermia protection
-					if v.protection.type == "hyper" then
+					elseif v.protection.type == "hyper" then
 						targetexposure = targetexposure - v.protection.value
-					end
-					
 					-- Hybrid protection
-					if v.protection.type == "hybrid" then
+					elseif v.protection.type == "hybrid" then
 						if targetexposure >= 125 then
 							targetexposure = targetexposure - v.protection.value
 						elseif targetexposure <= 75 then
