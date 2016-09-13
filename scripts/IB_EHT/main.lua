@@ -677,19 +677,11 @@ function EHT:CalculateModifier(temperature)
 		end
 	end
 
-	if Util:between(armor, 10, 25) then
-		factor = factor * 0.95
-	elseif Util:between(armor, 25, 40) then
-		factor = factor * 0.9
-	elseif Util:between(armor, 40, 65) then
-		factor = factor * 0.8
-	elseif Util:between(armor, 65, 80) then
-		factor = factor * 0.7
-	elseif Util:between(armor, 80, 100) then
-		factor = factor * 0.6
-	elseif armor > 100 then
-		factor = factor * 0.5
-	end
+    -- apply dynamic armor rating
+    factor = factor * ( 1 - armor * 0.001 )
+    if factor < 0 then
+        factor = 0
+    end
 
     -- Targetexposure limit
 	targetexposure = Util:limiter(targetexposure, 0, 200)
