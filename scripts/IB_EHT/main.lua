@@ -513,16 +513,16 @@ function EHT:CalculateModifier(temperature)
 	local exposure = status.resource("exposure")
 	
 	-- Target exposure based on temperature
-	local targetexposure = 90 + ( temperature * 0.67 )
+	local targetexposure = 90 + temperature
 	
 	-- Is hybrid?
 	local isHybrid = false
 	
 	-- Is liquid?
 	local isLiquid = false
-	
-	-- set factor
-	local factor = 1
+
+    -- Set factor
+    local factor = 1
 	
 	-- set higher targetexposure dependent on current level
 	
@@ -560,7 +560,7 @@ function EHT:CalculateModifier(temperature)
         end
     end
 
-	-- Apply equip stats
+    -- Apply equip stats
 	for _,v in pairs(self.config.equip) do
 		local it = player.equippedItem(v.slot)
 		if it ~= nil then
@@ -667,14 +667,32 @@ function EHT:CalculateModifier(temperature)
 		
 		-- apply heatchange
 		targetexposure = targetexposure + heatchange
+    end
+
+	-- Get current protection
+	local armor = 0
+	for _,v in pairs(status.getPersistentEffects("armor")) do
+		if v.stat == "protection" then
+			armor = armor + v.amount
+		end
+	end
+
+	if Util:between(armor, 10, 25) then
+		factor = factor * 0.95
+	elseif Util:between(armor, 25, 40) then
+		factor = factor * 0.9
+	elseif Util:between(armor, 40, 65) then
+		factor = factor * 0.8
+	elseif Util:between(armor, 65, 80) then
+		factor = factor * 0.7
+	elseif Util:between(armor, 80, 100) then
+		factor = factor * 0.6
+	elseif armor > 100 then
+		factor = factor * 0.5
 	end
 
     -- Targetexposure limit
-    if targetexposure < 0 then
-        targetexposure = 0
-    elseif targetexposure > 200 then
-        targetexposure = 200
-    end
+	targetexposure = Util:limiter(targetexposure, 0, 200)
 
 	-- calculate modifier
 	local modifier = self:modHelper(exposure, targetexposure, factor)
@@ -690,7 +708,7 @@ function EHT:CalculateModifier(temperature)
 	end
 	
 	-- Modify exposure
-	status.modifyResource("exposure", math.ceil(modifier))
+	status.modifyResource("exposure", modifier)
 	
 	-- Return the current modifier
 	return modifier

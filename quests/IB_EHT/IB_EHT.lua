@@ -31,8 +31,8 @@ function init()
 	
 	-- Storage
 	storage.complete = storage.complete or false
-	storage.tick = storage.tick or 0
-	
+	storage.tick = storage.tick or 1
+
 	-- Quest description
 	self.descriptions = config.getParameter("descriptions")
 	
@@ -51,7 +51,7 @@ function init()
 	
 	-- init tracker
 	quest.setObjectiveList({
-		{self.descriptions.showInfo, false}
+		{ self.descriptions.showInfo, false }
 	})
 	
 	sb.logInfo("EHT initialized")
@@ -104,7 +104,7 @@ function update(dt)
 	-- Modifier with own tickrate
 	if storage.tick == config.getParameter("exposureTick") then
 		self.EHT:ShowMessage(self.EHT:CalculateModifier(temperature))
-		storage.tick = 0
+		storage.tick = 1
 	else
 		storage.tick = storage.tick + 1
 	end
