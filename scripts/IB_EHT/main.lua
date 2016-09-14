@@ -552,7 +552,8 @@ function EHT:CalculateModifier(temperature)
 	-- Apply special status effects
     for _,v in pairs(self.config.status) do
         if self.hasEffect(v.effect) then
-            if v.type == "hypo" then
+			factor = factor + v.factor
+			if v.type == "hypo" then
                 targetexposure = targetexposure + v.value
             elseif v.type == "hyper" then
                 targetexposure = targetexposure - v.value
@@ -600,6 +601,7 @@ function EHT:CalculateModifier(temperature)
 		for _,v in pairs(self.config.liquid) do
 			if liq[1] == v.type then
 				targetexposure = targetexposure + v.mod
+				factor = factor + v.factor
 				break
 			end
 		end
@@ -617,7 +619,7 @@ function EHT:CalculateModifier(temperature)
 				if liq == nil and isVisible then -- if the vent is in liquid it won't work, also we have to see it
 					targetexposure = 115
 					isHybrid = true
-					factor = 2 -- faster rate for hybrid sources
+					factor = factor + 1 -- faster rate for hybrid sources
 					break -- we have a vent outside of liquid
 				end
 			end
@@ -657,7 +659,7 @@ function EHT:CalculateModifier(temperature)
 						
 						-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
 						heatchange = heatchange + tmp
-						factor = 2 -- faster rate for heat sources
+						factor = factor + 1 -- faster rate for heat sources
 						
 					end
 					-- we need to run through all heat sources to get the current modified warmth in range
