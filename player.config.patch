@@ -1,9 +1,9 @@
 [
 	{"op" : "add", "path" : "/statusControllerSettings/resources/exposure", "value" :
-		{
-			"maxValue" : 200.0,
-			"initialValue" : 100.0
-		}
+	{
+		"maxValue" : 200.0,
+		"initialValue" : 100.0
+	}
 	},
 	{ "op" : "add",	"path": "/defaultBlueprints/tier1/-", "value": {"item": "ib_eht-codex"}},
 	{ "op" : "add",	"path": "/defaultBlueprints/tier1/-", "value": {"item": "ib_eht_starter"}}

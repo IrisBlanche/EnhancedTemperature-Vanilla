@@ -221,7 +221,7 @@ function EHT:CalculateTemperature()
 				if self:isInLayer(l, layers) then
 					if self:IsNight() then
 						temperature = self:layerOffset(true, layercount, layers, temp)
-						else
+					else
 						temperature = self:layerOffset(false, layercount, layers, temp)
 					end
 					break -- stop running the loop since we have the data
@@ -396,7 +396,7 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 				-- return new temperature based on layer calculation
 				if offsetDirection == "+" then
 					return temperature2 + ( tmp * pct )
-					else
+				else
 					return temperature2 - ( tmp * pct )
 				end
 			end
@@ -520,9 +520,9 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Is liquid?
 	local isLiquid = false
-
-    -- Set factor
-    local factor = 1
+	
+	-- Set factor
+	local factor = 1
 	
 	-- set higher targetexposure dependent on current level
 	
@@ -532,7 +532,7 @@ function EHT:CalculateModifier(temperature)
 	elseif Util:between(exposure, 0, 49.9) then
 		targetexposure = targetexposure * 0.75
 		
-	-- Hyperthermia
+		-- Hyperthermia
 	elseif Util:between(exposure, 125.1, 150) then
 		targetexposure = targetexposure * 1.1
 	elseif Util:between(exposure, 150.1, 200) then
@@ -548,20 +548,20 @@ function EHT:CalculateModifier(temperature)
 			targetexposure = targetexposure - 3
 		end
 	end
-
+	
 	-- Apply special status effects
-    for _,v in pairs(self.config.status) do
-        if self.hasEffect(v.effect) then
+	for _,v in pairs(self.config.status) do
+		if self.hasEffect(v.effect) then
 			factor = factor + v.factor
 			if v.type == "hypo" then
-                targetexposure = targetexposure + v.value
-            elseif v.type == "hyper" then
-                targetexposure = targetexposure - v.value
-            end
-        end
-    end
-
-    -- Apply equip stats
+				targetexposure = targetexposure + v.value
+			elseif v.type == "hyper" then
+				targetexposure = targetexposure - v.value
+			end
+		end
+	end
+	
+	-- Apply equip stats
 	for _,v in pairs(self.config.equip) do
 		local it = player.equippedItem(v.slot)
 		if it ~= nil then
@@ -575,10 +575,10 @@ function EHT:CalculateModifier(temperature)
 					-- Hypothermia protection
 					if v.protection.type == "hypo" then
 						targetexposure = targetexposure + v.protection.value
-					-- Hyperthermia protection
+						-- Hyperthermia protection
 					elseif v.protection.type == "hyper" then
 						targetexposure = targetexposure - v.protection.value
-					-- Hybrid protection
+						-- Hybrid protection
 					elseif v.protection.type == "hybrid" then
 						if targetexposure >= 125 then
 							targetexposure = targetexposure - v.protection.value
@@ -617,10 +617,10 @@ function EHT:CalculateModifier(temperature)
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
 				liq = world.liquidAt( world.entityPosition(k) )
 				if liq == nil and isVisible then -- if the vent is in liquid it won't work, also we have to see it
-					targetexposure = 115
-					isHybrid = true
-					factor = factor + 1 -- faster rate for hybrid sources
-					break -- we have a vent outside of liquid
+				targetexposure = 115
+				isHybrid = true
+				factor = factor + 1 -- faster rate for hybrid sources
+				break -- we have a vent outside of liquid
 				end
 			end
 		end
@@ -635,42 +635,42 @@ function EHT:CalculateModifier(temperature)
 				liq = world.liquidAt( world.entityPosition(k) )
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
 				if liq == nil and isVisible then -- if the source is in liquid it won't work
-					-- check if a certain animation state is needed
-					local vstated = true
-					if v.state.needed then
-						if not world.getObjectParameter(k,"provideWarmth") then
-							vstated = false
-						end
+				-- check if a certain animation state is needed
+				local vstated = true
+				if v.state.needed then
+					if not world.getObjectParameter(k,"provideWarmth") then
+						vstated = false
+					end
+				end
+				
+				if vstated then
+					
+					local range = world.magnitude(world.entityPosition(k), entity.position())/5
+					local tmp = v.exposure_mod
+					
+					
+					if range ~= 0 then
+						tmp = tmp / range
 					end
 					
-					if vstated then
-						
-						local range = world.magnitude(world.entityPosition(k), entity.position())/5
-						local tmp = v.exposure_mod
-						
-						
-						if range ~= 0 then
-							tmp = tmp / range
-						end
-						
-						if tmp > v.exposure_mod then
-							tmp = v.exposure_mod
-						end
-						
-						-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
-						heatchange = heatchange + tmp
-						factor = factor + 1 -- faster rate for heat sources
-						
+					if tmp > v.exposure_mod then
+						tmp = v.exposure_mod
 					end
-					-- we need to run through all heat sources to get the current modified warmth in range
+					
+					-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
+					heatchange = heatchange + tmp
+					factor = factor + 1 -- faster rate for heat sources
+				
+				end
+				-- we need to run through all heat sources to get the current modified warmth in range
 				end
 			end
 		end
 		
 		-- apply heatchange
 		targetexposure = targetexposure + heatchange
-    end
-
+	end
+	
 	-- Get current protection
 	local armor = 0
 	for _,v in pairs(status.getPersistentEffects("armor")) do
@@ -678,16 +678,16 @@ function EHT:CalculateModifier(temperature)
 			armor = armor + v.amount
 		end
 	end
-
-    -- apply dynamic armor rating
-    factor = factor * ( 1 - armor * 0.001 )
-    if factor < 0 then
-        factor = 0
-    end
-
-    -- Targetexposure limit
+	
+	-- apply dynamic armor rating
+	factor = factor * ( 1 - armor * 0.001 )
+	if factor < 0 then
+		factor = 0
+	end
+	
+	-- Targetexposure limit
 	targetexposure = Util:limiter(targetexposure, 0, 200)
-
+	
 	-- calculate modifier
 	local modifier = self:modHelper(exposure, targetexposure, factor)
 	
