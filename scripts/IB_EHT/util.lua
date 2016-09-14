@@ -25,44 +25,44 @@ Util.__index = Util
 -- print the table
 -- #########################################################################################################
 function Util:table_print (tt, indent, done)
-  done = done or {}
-  indent = indent or 0
-  if type(tt) == "table" then
-    local sb = {}
-    for key, value in pairs (tt) do
-      table.insert(sb, string.rep (" ", indent)) -- indent it
-      if type (value) == "table" and not done [value] then
-        table.insert(sb, key .. " : ")
-        done [value] = true
-        table.insert(sb, "{\n");
-        table.insert(sb, Util:table_print (value, indent + 2, done))
-        table.insert(sb, string.rep (" ", indent)) -- indent it
-        table.insert(sb, "}\n");
-      elseif "number" == type(key) then
-        table.insert(sb, string.format("%s\n", tostring(value)))
-      else
-        table.insert(sb, string.format(
-            "%s = \"%s\"\n", tostring (key), tostring(value)))
-       end
-    end
-    return table.concat(sb)
-  else
-    return tt .. "\n"
-  end
+	done = done or {}
+	indent = indent or 0
+	if type(tt) == "table" then
+		local sb = {}
+		for key, value in pairs (tt) do
+			table.insert(sb, string.rep (" ", indent)) -- indent it
+			if type (value) == "table" and not done [value] then
+				table.insert(sb, key .. " : ")
+				done [value] = true
+				table.insert(sb, "{\n");
+				table.insert(sb, Util:table_print (value, indent + 2, done))
+				table.insert(sb, string.rep (" ", indent)) -- indent it
+				table.insert(sb, "}\n");
+			elseif "number" == type(key) then
+				table.insert(sb, string.format("%s\n", tostring(value)))
+			else
+				table.insert(sb, string.format(
+					"%s = \"%s\"\n", tostring (key), tostring(value)))
+			end
+		end
+		return table.concat(sb)
+	else
+		return tt .. "\n"
+	end
 end
 -- #########################################################################################################
 -- to string function for converting data to readable string
 -- #########################################################################################################
 function Util:to_string( tbl )
-    if  "nil" == type( tbl ) then
-        return tostring(nil)
-    elseif  "table" == type( tbl ) then
-        return Util:table_print(tbl)
-    elseif  "string" == type( tbl ) then
-        return tbl
-    else
-        return tostring(tbl)
-    end
+	if  "nil" == type( tbl ) then
+		return tostring(nil)
+	elseif  "table" == type( tbl ) then
+		return Util:table_print(tbl)
+	elseif  "string" == type( tbl ) then
+		return tbl
+	else
+		return tostring(tbl)
+	end
 end
 -- #########################################################################################################
 -- is value between vmin and vmax
@@ -106,18 +106,18 @@ end
 -- Get the current planet size
 -- #########################################################################################################
 function Util:getPlanetSize()
-    return world.xwrap(-10000) + world.xwrap(10000)
+	return world.xwrap(-10000) + world.xwrap(10000)
 end
 -- #########################################################################################################
 -- Limit the value
 -- #########################################################################################################
 function Util:limiter(val,min,max)
-    if val < min then
-        val = min
-    elseif val > max then
-        val = max
-    end
-    return val
+	if val < min then
+		val = min
+	elseif val > max then
+		val = max
+	end
+	return val
 end
 -- #########################################################################################################
 -- #########################################################################################################
