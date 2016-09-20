@@ -1,13 +1,1 @@
-[{"op" : "add", "path" : "/projectiles/-", "value" : 
-	{
-		"projectile" : "wi_ember",
-		"parameters" : {
-			"power" : 0
-		},
-		"velocity" : [0, -100],
-		"ratePerX" : 0.1,
-		"spawnAboveRegion" : 30,
-		"spawnHorizontalPad" : 10,
-		"windAffectAmount" : 1
-	}
-}]
+[{"op" : "add", "path" : "/statusEffects/-", "value" : "IB_EHT_ember"}]
