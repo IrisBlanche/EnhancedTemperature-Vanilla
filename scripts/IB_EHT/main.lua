@@ -202,9 +202,6 @@ function EHT:CalculateTemperature()
 		-- Only apply additional calculation when the planettype is not marked for skip
 		if not temp.skipCheck then
 			
-			-- Get windlevel
-			local wind = math.abs(world.windLevel(entity.position())) / 10
-			
 			-- get planetlayers
 			local layers = world.getProperty("eht_layers", nil)
 			
@@ -229,13 +226,27 @@ function EHT:CalculateTemperature()
 				layercount = layercount + 1
 			end
 			
-			-- apply windlevel as absolute value
-			temperature = temperature - wind
-			
 			-- apply weather offset
 			for _,v in pairs(self.config.weathertypes) do
 				if self:hasEffect(v.name) then
-					temperature = temperature + v.mod
+					-- check type
+					-- only allow hypo and hyper
+					if v.type == "hypo" then
+						temperature = temperature - v.mod
+						-- apply wind if not skipping
+						-- "hypothermia weather" will cause hot wind
+						if v.skipWind ~= false then
+							temperature = temperature - math.abs(world.windLevel(entity.position())) / 10
+						end
+					elseif v.type == "hyper" then
+						temperature = temperature + v.mod
+						-- apply wind if not skipping
+						-- "hyperthermia weather" will cause hot wind
+						if v.skipWind ~= false then
+							temperature = temperature + math.abs(world.windLevel(entity.position())) / 10
+						end
+					end
+					
 					break
 				end
 			end
