@@ -1,0 +1,4 @@
+Files are kept to prevent logspam for pre 1.2 generated worlds.
+They will be removed if i find a proper way to remove environmental effects.
+
+~ Iris ~
