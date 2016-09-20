@@ -4,6 +4,6 @@
 		{"op" : "add", "path" : "/statusEffects", "value" : []}
 	],
 	[
-		{"op" : "add", "path" : "/statusEffects/-", "value" : "IB_EHT_rain"}
+		{"op" : "add", "path" : "/statusEffects/-", "value" : "IB_EHT_ligthash"}
 	]
 ]
