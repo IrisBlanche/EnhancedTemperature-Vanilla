@@ -44,12 +44,12 @@ Most things are explained in the ingame codex so make sure to read it first.
 It is possible that i forgot something to add in the codex. If you find something please let me know.
 
 ##* Downloads *
-For a Steam-version visit: http://steamcommunity.com/sharedfiles/filedetails/?id=754276836
-For a non-Steam version visit: http://community.playstarbound.com/resources/enhancedtemperature.4093/
-For a GitHub release visit: https://github.com/IrisBlanche/EnhancedTemperature-Vanilla/releases
+For a Steam-version visit: http://steamcommunity.com/sharedfiles/filedetails/?id=754276836  
+For a non-Steam version visit: http://community.playstarbound.com/resources/enhancedtemperature.4093/  
+For a GitHub release visit: https://github.com/IrisBlanche/EnhancedTemperature-Vanilla/releases  
 
 ##* Compatibility patches *
-EHT/Better Barren - Elysium Worlds: https://github.com/IrisBlanche/EnhancedTemperature-ElysiumWorlds/releases
+EHT/Better Barren - Elysium Worlds: https://github.com/IrisBlanche/EnhancedTemperature-ElysiumWorlds/releases  
 EHT/Frackin Universe: https://github.com/IrisBlanche/EnhancedTemperature-FrackinUniverse/releases
 
 ~ Iris ~ 
