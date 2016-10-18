@@ -44,7 +44,7 @@ function EHT.create()
 	}
 	
 	data.config = root.assetJson("/IB_EHT.config")
-	data.NightFlag = 17
+	data.NightFlag = 18
 	data.DayFlag = 6
 	data.offset = 0
 	data.transition = 4
@@ -234,7 +234,7 @@ function EHT:CalculateTemperature()
 					if v.type == "hypo" then
 						temperature = temperature - v.mod
 						-- apply wind if not skipping
-						-- "hypothermia weather" will cause hot wind
+						-- "hypothermia weather" will cause cold wind
 						if v.skipWind ~= false then
 							temperature = temperature - math.abs(world.windLevel(entity.position())) / 10
 						end
@@ -628,10 +628,10 @@ function EHT:CalculateModifier(temperature)
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
 				liq = world.liquidAt( world.entityPosition(k) )
 				if liq == nil and isVisible then -- if the vent is in liquid it won't work, also we have to see it
-				targetexposure = 115
-				isHybrid = true
-				factor = factor + 1 -- faster rate for hybrid sources
-				break -- we have a vent outside of liquid
+					targetexposure = 115
+					isHybrid = true
+					factor = factor + 1 -- faster rate for hybrid sources
+					break -- we have a vent outside of liquid
 				end
 			end
 		end
@@ -646,34 +646,34 @@ function EHT:CalculateModifier(temperature)
 				liq = world.liquidAt( world.entityPosition(k) )
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
 				if liq == nil and isVisible then -- if the source is in liquid it won't work
-				-- check if a certain animation state is needed
-				local vstated = true
-				if v.state.needed then
-					if not world.getObjectParameter(k,"provideWarmth") then
-						vstated = false
-					end
-				end
-				
-				if vstated then
-					
-					local range = world.magnitude(world.entityPosition(k), entity.position())/5
-					local tmp = v.exposure_mod
-					
-					
-					if range ~= 0 then
-						tmp = tmp / range
+					-- check if a certain animation state is needed
+					local vstated = true
+					if v.state.needed then
+						if not world.getObjectParameter(k,"provideWarmth") then
+							vstated = false
+						end
 					end
 					
-					if tmp > v.exposure_mod then
-						tmp = v.exposure_mod
-					end
+					if vstated then
+						
+						local range = world.magnitude(world.entityPosition(k), entity.position())/5
+						local tmp = v.exposure_mod
+						
+						
+						if range ~= 0 then
+							tmp = tmp / range
+						end
+						
+						if tmp > v.exposure_mod then
+							tmp = v.exposure_mod
+						end
+						
+						-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
+						heatchange = heatchange + tmp
+						factor = factor + 1 -- faster rate for heat sources
 					
-					-- more heat sources = quicker warmth (will be limited later to max value) and more exposure increase
-					heatchange = heatchange + tmp
-					factor = factor + 1 -- faster rate for heat sources
-				
-				end
-				-- we need to run through all heat sources to get the current modified warmth in range
+					end
+					-- we need to run through all heat sources to get the current modified warmth in range
 				end
 			end
 		end
