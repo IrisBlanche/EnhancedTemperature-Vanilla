@@ -2,7 +2,7 @@
 	"id" 			: "ib_eht_log",
 	"title" 		: "^green;EHT - Manual^reset;",
 	"description" 	: "The survival log of a stranded space explorer...",
-	"icon"			: "ib_eht_codex",
+	"icon"			: "ib_eht_codex.png",
 	"contentPages" 	: [
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		"\n       ^#BFBFBF;Personal Log,\n         Senior Engineering Officer,\n           ^green;Adam Leyson^reset;, ^#BFBFBF;Human\n\n                        ^gray;- - - - - - -\n\n                   ^gray;[ ^#595959;September 20 ^gray;]:^reset;\n   Shortly after my ship's orbital controls malfunctioned, I made a call to eject to the planet below.\n   My S.A.I.L. personality is also facing malfunction; No doubt the work of that piece of Floran technology I purchased... (Damn those plants!)",

@@ -1,11 +1,14 @@
 {
-  "input" : [
-    { "item" : "money", "count" : 1 }
-  ],
-  "output" : {
-    "item" : "ib_eht-codex",
-    "count" : 1
-  },
-  "duration" : 0.15,
-  "groups" : [ "plain" ]
+	"input" : [
+		{
+			"item" : "money",
+			"count" : 1
+		}
+	],
+	"output" : {
+		"item" : "ib_eht-codex",
+		"count" : 1
+	},
+	"duration" : 0.15,
+	"groups" : [ "plain" ]
 }
