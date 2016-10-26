@@ -6,5 +6,6 @@
 	}
 	},
 	{ "op" : "add",	"path": "/defaultBlueprints/tier1/-", "value": {"item": "ib_eht-codex"}},
+	{ "op" : "add",	"path": "/defaultBlueprints/tier1/-", "value": {"item": "ib_eht_log-codex"}},
 	{ "op" : "add",	"path": "/defaultBlueprints/tier1/-", "value": {"item": "ib_eht_starter"}}
 ]
