@@ -101,9 +101,14 @@ function update(dt)
 	
 	-- Temperature
 	local temperature = self.EHT:CalculateTemperature()
-	
-	-- Modifier with own tickrate
-	storage.tick = Util:tick(storage.tick, config.getParameter("exposureTick"), self.EHT:ShowMessage, self.EHT:CalculateModifier(temperature))
+
+	-- Messagetick
+	if storage.tick >= config.getParameter("exposureTick") then
+		self.EHT:ShowMessage(self.EHT:CalculateModifier(temperature))
+		storage.tick = 1
+	else
+		storage.tick = storage.tick + 1
+	end
 	
 	-- Update quest tracker for keeping the information about the actual status "up to date"
 	quest.setObjectiveList({
