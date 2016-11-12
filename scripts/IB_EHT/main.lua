@@ -539,15 +539,19 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Hypothermia
 	if Util:between(exposure, 50, 74.9) then
-		targetexposure = targetexposure * 0.9
+		targetexposure = targetexposure * 0.5
+		factor = factor + (factor * 0.1)
 	elseif Util:between(exposure, 0, 49.9) then
-		targetexposure = targetexposure * 0.75
-		
+		targetexposure = targetexposure * 0.45
+		factor = factor + (factor * 0.25)
+	
 		-- Hyperthermia
 	elseif Util:between(exposure, 125.1, 150) then
-		targetexposure = targetexposure * 1.1
+		targetexposure = targetexposure * 1.5
+		factor = factor + (factor * 0.1)
 	elseif Util:between(exposure, 150.1, 200) then
-		targetexposure = targetexposure * 1.25
+		targetexposure = targetexposure * 1.55
+		factor = factor + (factor * 0.25)
 	end
 	
 	
@@ -618,8 +622,8 @@ function EHT:CalculateModifier(temperature)
 		end
 	end
 	
+	-- apply hybrid source when we're not in liquid ( vents doesn't work well in liquid >v< )
 	if not isLiquid then
-		-- apply hybrid source when we're not in liquid ( vents doesn't work well in liquid >v< )
 		local hybridchange = 0
 		
 		for _,v in pairs(self.config.hybridSources) do
@@ -637,8 +641,8 @@ function EHT:CalculateModifier(temperature)
 		end
 	end
 	
+	-- no hybrid detected: apply heatsource offset instead
 	if not isHybrid and not isLiquid then
-		-- no hybrid detected: apply heatsource offset instead
 		local heatchange = 0
 		for _,v in pairs(self.config.heatSources) do
 			local objects = world.objectQuery(entity.position(), self.config.heatSourcesRange, { order = "nearest", name = v.name } )
@@ -682,7 +686,7 @@ function EHT:CalculateModifier(temperature)
 		targetexposure = targetexposure + heatchange
 	end
 	
-	-- Get current protection
+	-- Get current protection based on armor rating
 	local armor = 0
 	for _,v in pairs(status.getPersistentEffects("armor")) do
 		if v.stat == "protection" then
@@ -692,8 +696,8 @@ function EHT:CalculateModifier(temperature)
 	
 	-- apply dynamic armor rating
 	factor = factor * ( 1 - armor * 0.001 )
-	if factor < 0 then
-		factor = 0
+	if factor < 0.01 then
+		factor = 0.01
 	end
 	
 	-- Targetexposure limit
