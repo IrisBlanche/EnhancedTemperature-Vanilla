@@ -563,6 +563,7 @@ function EHT:CalculateModifier(temperature)
 	if Util:between(temperature, -15, -0.1) then
 		targetexposure = targetexposure * 0.5
 		factor = factor + (factor * 0.1)
+	elseif temperature < -15 then
 		targetexposure = targetexposure * 0.45
 		factor = factor + (factor * 0.25)
 	
