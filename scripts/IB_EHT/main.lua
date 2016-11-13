@@ -294,91 +294,113 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 	local offsetDirection = "-"
 	
 	-- Temperature difference between layers
-	local tmp = nil
+	local tmp = 0
 	
 	if isNight then
+		
 		-- Time based calculation?
 		if Util:between(timer.hour, self.NightFlag, self.NightFlag + (self.transition-1) ) then
+			
+			-- YES
+		
+			-- get minute
 			local minute = (timer.minute + (timer.hour - self.NightFlag) ) / self.transition
-			-- Get layer time based on time
-			local layertime_curr =  ( ( temp.day[layercount]     - temp.night[layercount]     ) * minute)
-			local layertime_other = ( ( temp.day[layercount - 1] - temp.night[layercount - 1] ) * minute)
 			
-			-- get layer difference
-			tmp = math.abs( Util:diff(temp.day[layercount] - layertime_curr, temp.day[layercount - 1] - layertime_other) )
+			-- Get layer temperature based on time
+			local layertime_curr =  ( ( temp.day[layercount] - temp.night[layercount] ) * minute)
 			
-			-- set direction
-			if (temp.day[layercount] - layertime_curr) > (temp.day[layercount - 1] - layertime_other) then
-				offsetDirection = "+"
+			-- if not space
+			if pos < layers.space.layerLevel then
+				
+				-- calculate layer difference
+				local layertime_other = ( ( temp.day[layercount - 1] - temp.night[layercount - 1] ) * minute)
+				
+				-- get layer difference
+				tmp = math.abs( Util:diff(temp.day[layercount] - layertime_curr, temp.day[layercount - 1] - layertime_other) )
+				
+				-- set direction
+				if (temp.day[layercount] - layertime_curr) > (temp.day[layercount - 1] - layertime_other) then
+					offsetDirection = "+"
+				end
+		
+				-- set temperature2
+				temperature2 = temp.day[layercount - 1] - layertime_curr
 			end
 			
 			-- set temperature
 			temperature = temp.day[layercount] - layertime_curr
+		else
+			
+			-- NO
 			
 			-- if not space
 			if pos < layers.space.layerLevel then
-				-- set temperature2
-				temperature2 = temp.day[layercount - 1] - layertime_curr
-			end
-		else
-			-- get layer difference
-			tmp = Util:diff( temp.night[layercount], temp.night[layercount - 1] )
+				-- get layer difference
+				tmp = Util:diff( temp.night[layercount], temp.night[layercount - 1] )
 			
-			-- set direction
-			if temp.night[layercount] > temp.night[layercount - 1] then
-				offsetDirection = "+"
+				-- set direction
+				if temp.night[layercount] > temp.night[layercount - 1] then
+					offsetDirection = "+"
+				end
+		
+				-- set temperature2
+				temperature2 = temp.night[layercount - 1]
 			end
 			
 			-- set temperature
 			temperature = temp.night[layercount]
-			
-			-- if not space
-			if pos < layers.space.layerLevel then
-				-- set temperature2
-				temperature2 = temp.night[layercount - 1]
-			end
 		end
 	else
 		-- Time based calculation?
 		if Util:between(timer.hour, self.DayFlag, self.DayFlag + (self.transition-1) ) then
+			
+			-- YES
+			
+			-- get minute
 			local minute = (timer.minute + (timer.hour - self.DayFlag) ) / self.transition
+			
 			-- Get layer time based on time
-			local layertime_curr =  ( ( temp.day[layercount]     - temp.night[layercount]     ) * minute)
-			local layertime_other = ( ( temp.day[layercount - 1] - temp.night[layercount - 1] ) * minute)
+			local layertime_curr =  ( ( temp.day[layercount] - temp.night[layercount] ) * minute)
 			
-			-- get layer difference
-			tmp = math.abs( Util:diff( temp.night[layercount] + layertime_curr, temp.night[layercount - 1] + layertime_other ) )
-			
-			-- set direction
-			if ( temp.night[layercount] + layertime_curr ) > ( temp.night[layercount - 1] + layertime_other ) then
-				offsetDirection = "+"
+			-- if not space
+			if pos < layers.space.layerLevel then
+				local layertime_other = ( ( temp.day[layercount - 1] - temp.night[layercount - 1] ) * minute)
+				
+				-- get layer difference
+				tmp = math.abs( Util:diff( temp.night[layercount] + layertime_curr, temp.night[layercount - 1] + layertime_other ) )
+				
+				-- set direction
+				if ( temp.night[layercount] + layertime_curr ) > ( temp.night[layercount - 1] + layertime_other ) then
+					offsetDirection = "+"
+				end
+					
+				-- set temperature2
+				temperature2 = temp.night[layercount - 1] + layertime_curr
 			end
 			
 			-- set temperature
 			temperature = temp.night[layercount] + layertime_curr
+		else
+			
+			-- NO
 			
 			-- if not space
 			if pos < layers.space.layerLevel then
-				-- set temperature2
-				temperature2 = temp.night[layercount - 1] + layertime_curr
-			end
-		else
-			-- get layer difference
-			tmp = Util:diff(temp.day[layercount], temp.day[layercount - 1])
 			
-			-- set direction
-			if temp.day[layercount] > temp.day[layercount - 1] then
-				offsetDirection = "+"
+				-- get layer difference
+				tmp = Util:diff(temp.day[layercount], temp.day[layercount - 1])
+				
+				-- set direction
+				if temp.day[layercount] > temp.day[layercount - 1] then
+					offsetDirection = "+"
+				end
+			
+				-- set temperature2
+				temperature2 = temp.day[layercount - 1]
 			end
 			
 			-- set temperature
 			temperature = temp.day[layercount]
-			
-			-- if not space
-			if pos < layers.space.layerLevel then
-				-- set temperature2
-				temperature2 = temp.day[layercount - 1]
-			end
 		end
 	end
 	
@@ -538,18 +560,17 @@ function EHT:CalculateModifier(temperature)
 	-- set higher targetexposure dependent on current level
 	
 	-- Hypothermia
-	if Util:between(exposure, 50, 74.9) then
+	if Util:between(temperature, -15, -0.1) then
 		targetexposure = targetexposure * 0.5
 		factor = factor + (factor * 0.1)
-	elseif Util:between(exposure, 0, 49.9) then
 		targetexposure = targetexposure * 0.45
 		factor = factor + (factor * 0.25)
 	
 		-- Hyperthermia
-	elseif Util:between(exposure, 125.1, 150) then
+	elseif Util:between(temperature, 34.5, 50) then
 		targetexposure = targetexposure * 1.5
 		factor = factor + (factor * 0.1)
-	elseif Util:between(exposure, 150.1, 200) then
+	elseif temperature > 50 then
 		targetexposure = targetexposure * 1.55
 		factor = factor + (factor * 0.25)
 	end
