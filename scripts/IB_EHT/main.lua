@@ -51,6 +51,9 @@ function EHT.create()
 	
 	data.offset = 0
 	data.oldid = "NA"
+
+	-- Get planetsizes based on config (patched)
+	data.planetSizes = root.assetJson("/terrestrial_worlds.config:planetSizes")
 	
 	return data
 end
@@ -434,14 +437,11 @@ function EHT:getLayers()
 		return { shipworld = true }
 	end
 	
-	-- Get planetsizes based on config (patched)
-	local planetSizes = root.assetJson("/terrestrial_worlds.config:planetSizes")
-	
 	-- get xwrap of this world
 	local size = Util:getPlanetSize()
 	
 	-- get associated world
-	for k,v in pairs(planetSizes) do
+	for k,v in pairs(self.planetSizes) do
 		if v.size[1] == size then
 			world.setProperty("eht_layers", v.layers)
 			return v.layers
