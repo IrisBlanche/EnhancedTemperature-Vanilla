@@ -33,6 +33,12 @@ EHT.__index = EHT
 function EHT.create()
 	local data = setmetatable({}, EHT)
 	
+	data.config = root.assetJson("/IB_EHT_config/core.config")
+	local configs = { "equip.config", "heatsources.config", "hybridsources.config", "liquids.config", "planetTypes.config", "status.config", "weather.config" }
+	for _,config in ipairs(configs) do
+		data.config = sb.jsonMerge(data.config, root.assetJson("/IB_EHT_config/" .. config))
+	end
+
 	data.lvlFlag = {
 		hypo3 = false,
 		hypo2 = false,
@@ -42,17 +48,8 @@ function EHT.create()
 		hyper2 = false,
 		hyper3 = false
 	}
-
-	data.config = root.assetJson("/IB_EHT_config/core.config")
-	local configs = { "equip.config", "heatsources.config", "hybridsources.config", "liquids.config", "planetTypes.config", "status.config", "weather.config" }
-	for _,config in ipairs(configs) do
-		data.config = sb.jsonMerge(data.config, root.assetJson("/IB_EHT_config/" .. config))
-	end
-
-	data.NightFlag = 18
-	data.DayFlag = 6
+	
 	data.offset = 0
-	data.transition = 4
 	data.oldid = "NA"
 	
 	return data
@@ -114,25 +111,7 @@ end
 -- Is the player on the planet?
 -- #########################################################################################################
 function EHT:IsOnPlanet(planettype)
-	-- check if property already set
-	local p = world.getProperty("eht_planet", nil)
-	
-	if p == nil then
-		-- property not set, get the mainplanettype
-		local pt = world.type()
-		if pt == planettype then
-			world.setProperty("eht_planet", pt)
-			return true
-		end
-	else
-		-- property set, check if same planettype
-		if p == planettype then
-			return true
-		end
-	end
-	
-	-- planettype not found
-	return false
+	return world.type() == planettype
 end
 
 -- #########################################################################################################
@@ -157,7 +136,7 @@ end
 -- Is it night?
 -- #########################################################################################################
 function EHT:IsNight()
-	return not Util:between( (self:FormatTime()).hour, self.DayFlag, self.NightFlag-1)
+	return not Util:between( (self:FormatTime()).hour, self.config.DayStart, self.config.NightStart-1)
 end
 
 -- #########################################################################################################
@@ -271,7 +250,7 @@ function EHT:CalculateTemperature()
 			end
 		else
 			-- apply standard regardless of the rest (for missions and stuff since we don't want to have the missions too hard)
-			temperature = 25.0
+			temperature = self.config.fallbackTemperature
 		end
 	end
 	
@@ -304,12 +283,12 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 	if isNight then
 		
 		-- Time based calculation?
-		if Util:between(timer.hour, self.NightFlag, self.NightFlag + (self.transition-1) ) then
+		if Util:between(timer.hour, self.config.NightStart, self.config.NightStart + (self.config.TransitionTime-1) ) then
 			
 			-- YES
 		
 			-- get minute
-			local minute = (timer.minute + (timer.hour - self.NightFlag) ) / self.transition
+			local minute = (timer.minute + (timer.hour - self.config.NightStart) ) / self.config.TransitionTime
 			
 			-- Get layer temperature based on time
 			local layertime_curr =  ( ( temp.day[layercount] - temp.night[layercount] ) * minute)
@@ -357,12 +336,12 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 		end
 	else
 		-- Time based calculation?
-		if Util:between(timer.hour, self.DayFlag, self.DayFlag + (self.transition-1) ) then
+		if Util:between(timer.hour, self.config.DayStart, self.config.DayStart + (self.config.TransitionTime-1) ) then
 			
 			-- YES
 			
 			-- get minute
-			local minute = (timer.minute + (timer.hour - self.DayFlag) ) / self.transition
+			local minute = (timer.minute + (timer.hour - self.config.DayStart) ) / self.config.TransitionTime
 			
 			-- Get layer time based on time
 			local layertime_curr =  ( ( temp.day[layercount] - temp.night[layercount] ) * minute)
@@ -410,7 +389,7 @@ function EHT:layerOffset(isNight, layercount, layers, temp)
 	end
 	
 	-- Blocks to calculate for each layer
-	local tmpcmp = 50
+	local tmpcmp = self.config.blockRange
 	
 	-- layerlevel
 	local layerLevel = {
@@ -452,7 +431,6 @@ function EHT:getLayers()
 	-- do not perform the check when we're on our ship
 	if player.worldId() == player.ownShipWorldId() then
 		world.setProperty("eht_layers", { shipworld = true })
-		world.setProperty("eht_planet", "shipworld")
 		return { shipworld = true }
 	end
 	
