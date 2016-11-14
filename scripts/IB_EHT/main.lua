@@ -612,15 +612,27 @@ function EHT:CalculateModifier(temperature)
 					-- Hypothermia protection
 					if v.protection.type == "hypo" then
 						targetexposure = targetexposure + v.protection.value
-						-- Hyperthermia protection
+						if exposure > targetexposure then
+							factor = factor - v.protection.factor
+						else
+							factor = factor + v.protection.factor
+						end
+					-- Hyperthermia protection
 					elseif v.protection.type == "hyper" then
 						targetexposure = targetexposure - v.protection.value
-						-- Hybrid protection
+						if exposure < targetexposure then
+							factor = factor - v.protection.factor
+						else
+							factor = factor + v.protection.factor
+						end
+					-- Hybrid protection
 					elseif v.protection.type == "hybrid" then
 						if targetexposure >= 125 then
 							targetexposure = targetexposure - v.protection.value
+							factor = factor - v.protection.factor
 						elseif targetexposure <= 75 then
 							targetexposure = targetexposure + v.protection.value
+							factor = factor - v.protection.factor
 						end
 					end
 				end
@@ -717,9 +729,9 @@ function EHT:CalculateModifier(temperature)
 	end
 	
 	-- apply dynamic armor rating
-	factor = factor * ( 1 - armor * 0.001 )
-	if factor < 0.01 then
-		factor = 0.01
+	factor = factor * ( 1 - armor * 0.0025 )
+	if factor < 0.001 then
+		factor = 0.001
 	end
 	
 	-- Targetexposure limit
