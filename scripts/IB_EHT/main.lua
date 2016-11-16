@@ -550,7 +550,7 @@ function EHT:CalculateModifier(temperature)
 		targetexposure = targetexposure * 0.45
 		factor = factor + (factor * 0.25)
 	
-		-- Hyperthermia
+	-- Hyperthermia
 	elseif Util:between(temperature, 34.5, 50) then
 		targetexposure = targetexposure * 1.5
 		factor = factor + (factor * 0.1)
@@ -644,15 +644,25 @@ function EHT:CalculateModifier(temperature)
 		local hybridchange = 0
 		
 		for _,v in pairs(self.config.hybridSources) do
-			local objects = world.objectQuery(entity.position(), v.range, { order = "nearest", name = v.name } )
+			local objects = world.objectQuery(entity.position(), Util:block(v.range), { order = "nearest", name = v.name } )
 			for _,k in pairs(objects) do
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
 				liq = world.liquidAt( world.entityPosition(k) )
 				if liq == nil and isVisible then -- if the vent is in liquid it won't work, also we have to see it
-					targetexposure = 115
-					isHybrid = true
-					factor = factor + 1 -- faster rate for hybrid sources
-					break -- we have a vent outside of liquid
+					-- check if a certain animation state is needed
+					local vstated = true
+					if v.state.needed then
+						if not world.getObjectParameter(k,"provideWarmth") then
+							vstated = false
+						end
+					end
+					
+					if vstated then
+						targetexposure = 115
+						isHybrid = true
+						factor = factor + 1 -- faster rate for hybrid sources
+						break -- we have a vent outside of liquid
+					end
 				end
 			end
 		end
@@ -662,7 +672,7 @@ function EHT:CalculateModifier(temperature)
 	if not isHybrid and not isLiquid then
 		local heatchange = 0
 		for _,v in pairs(self.config.heatSources) do
-			local objects = world.objectQuery(entity.position(), self.config.heatSourcesRange, { order = "nearest", name = v.name } )
+			local objects = world.objectQuery(entity.position(), Util:block(v.range), { order = "nearest", name = v.name } )
 			for _,k in pairs(objects) do
 				liq = world.liquidAt( world.entityPosition(k) )
 				local isVisible = Util:EHTdetect(entity.position(), world.entityPosition(k))
@@ -812,8 +822,6 @@ function EHT:ShowMessage(modifier)
 		return -- skip unnecessary checks
 	end
 	
-	-- return anyways >v<
-	return
 end
 -- #########################################################################################################
 -- #########################################################################################################
