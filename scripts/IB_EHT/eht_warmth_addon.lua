@@ -33,6 +33,11 @@ function update(dt)
 	-- Call old update if present
 	Util:safe_call(oupdate, dt)
 	
+	-- why can this even be nil? o.o
+	if object.getConfigParameter == nil then
+		return
+	end
+	
 	-- get config values
 	local ehtdata = object.getConfigParameter("ehtdata", nil)
 	
