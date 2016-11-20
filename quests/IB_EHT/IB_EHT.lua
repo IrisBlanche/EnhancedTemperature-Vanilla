@@ -116,7 +116,7 @@ function update(dt)
 	})
 	
 	-- Debug
-	sb.logInfo("Current world type", "%s", world.type())
+	sb.setLogMap("Current world type", "%s", world.type())
 	
 	-- Save data
 	saveData()
