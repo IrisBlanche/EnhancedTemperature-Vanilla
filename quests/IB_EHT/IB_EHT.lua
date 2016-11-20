@@ -55,7 +55,7 @@ function init()
 		{ self.descriptions.showInfo, false }
 	})
 	
-	-- sb.logInfo("EHT initialized")
+	sb.logInfo("EHT initialized")
 end
 
 -- #########################################################################################################
@@ -115,10 +115,8 @@ function update(dt)
 		{"Exposure: " .. string.format("%.0f", math.modf(status.resource("exposure") - 100 )) .. "\n- Current Temp: " ..  string.format("%.1f", temperature) .. " C", false}
 	})
 	
-	-- Debug Info
-	-- local wtime = self.EHT:FormatTime()
-	-- sb.setLogMap("Current world type", "%s", world.type())
-	-- sb.setLogMap("Current world time", "%s", string.format("%.0f:%.0f", wtime.hour, wtime.minute60))
+	-- Debug
+	sb.logInfo("Current world type", "%s", world.type())
 	
 	-- Save data
 	saveData()
