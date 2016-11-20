@@ -808,13 +808,13 @@ function EHT:ShowMessage(modifier)
 	-- get direction
 	local d = self:direction(modifier)
 	
-	if self:msgHelper(exposure, 25, d, "hypo3", "exposure_25", self.config.exposure.effects.hypo3, self.config.exposure.effects.hypo2, "hypo") then
+	if self:msgHelper(exposure, 24, d, "hypo3", "exposure_25", self.config.exposure.effects.hypo3, self.config.exposure.effects.hypo2, "hypo") then
 		return -- skip unnecessary checks
-	elseif self:msgHelper(exposure, 50, d, "hypo2", "exposure_50", self.config.exposure.effects.hypo2, self.config.exposure.effects.hypo1, "hypo") then
+	elseif self:msgHelper(exposure, 49, d, "hypo2", "exposure_50", self.config.exposure.effects.hypo2, self.config.exposure.effects.hypo1, "hypo") then
 		return -- skip unnecessary checks
-	elseif self:msgHelper(exposure, 75, d, "hypo1", "exposure_75", self.config.exposure.effects.hypo1, self.config.exposure.effects.hypo0, "hypo") then
+	elseif self:msgHelper(exposure, 74, d, "hypo1", "exposure_75", self.config.exposure.effects.hypo1, self.config.exposure.effects.hypo0, "hypo") then
 		return -- skip unnecessary checks
-	elseif self:msgHelper(exposure, 100, d, "switch", nil, self.config.exposure.effects.hypo0, self.config.exposure.effects.hyper0, "hypo") then
+	elseif self:msgHelper(exposure, 99, d, "switch", nil, self.config.exposure.effects.hypo0, self.config.exposure.effects.hyper0, "hypo") then
 		return -- skip unnecessary checks
 	elseif self:msgHelper(exposure, 125, d, "hyper1", "exposure_125", self.config.exposure.effects.hyper1, self.config.exposure.effects.hyper0, "hyper") then
 		return -- skip unnecessary checks
