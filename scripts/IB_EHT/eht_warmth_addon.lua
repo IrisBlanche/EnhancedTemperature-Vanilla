@@ -34,7 +34,7 @@ function update(dt)
 	Util:safe_call(oupdate, dt)
 	
 	-- get config values
-	local ehtdata = object.setConfigParameter("ehtdata", nil)
+	local ehtdata = object.getConfigParameter("ehtdata", nil)
 	
 	if ehtdata ~= nil then
 		-- provide warmth based on animation state by config

@@ -123,7 +123,7 @@ end
 function EHT:hasEffect(effect)
 	-- Scan for effect
 	local status = status.activeUniqueStatusEffectSummary()
-	
+
 	for i, v in ipairs (status) do
 		if v[1] == effect then
 			-- effect found
@@ -544,18 +544,18 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Hypothermia
 	if Util:between(temperature, -15, -0.1) then
-		targetexposure = targetexposure * 0.5
+		targetexposure = targetexposure * 0.85
 		factor = factor + (factor * 0.1)
 	elseif temperature < -15 then
-		targetexposure = targetexposure * 0.45
+		targetexposure = targetexposure * 0.75
 		factor = factor + (factor * 0.25)
 	
 	-- Hyperthermia
 	elseif Util:between(temperature, 34.5, 50) then
-		targetexposure = targetexposure * 1.5
+		targetexposure = targetexposure * 1.15
 		factor = factor + (factor * 0.1)
 	elseif temperature > 50 then
-		targetexposure = targetexposure * 1.55
+		targetexposure = targetexposure * 1.25
 		factor = factor + (factor * 0.25)
 	end
 	
@@ -571,12 +571,12 @@ function EHT:CalculateModifier(temperature)
 	
 	-- Apply special status effects
 	for _,v in pairs(self.config.status) do
-		if self.hasEffect(v.effect) then
+		if self:hasEffect(v.effect) then
 			factor = factor + v.factor
 			if v.type == "hypo" then
-				targetexposure = targetexposure + v.value
-			elseif v.type == "hyper" then
 				targetexposure = targetexposure - v.value
+			elseif v.type == "hyper" then
+				targetexposure = targetexposure + v.value
 			end
 		end
 	end
@@ -721,10 +721,12 @@ function EHT:CalculateModifier(temperature)
 		end
 	end
 	
-	-- apply dynamic armor rating
+	-- apply dynamic factor rating
 	factor = factor * ( 1 - armor * 0.0025 )
 	if factor < 0.001 then
 		factor = 0.001
+	elseif factor > 3.0 then
+		factor = 3.0
 	end
 	
 	-- Targetexposure limit
