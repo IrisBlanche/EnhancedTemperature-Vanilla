@@ -543,19 +543,19 @@ function EHT:CalculateModifier(temperature)
 	-- set higher targetexposure dependent on current level
 	
 	-- Hypothermia
-	if Util:between(temperature, -15, -0.1) then
-		targetexposure = targetexposure * 0.85
-		factor = factor + (factor * 0.1)
-	elseif temperature < -15 then
+	if Util:between(temperature, -20, -0.00001) then
 		targetexposure = targetexposure * 0.75
+		factor = factor + (factor * 0.1)
+	elseif temperature < -20 then
+		targetexposure = targetexposure * 0.45
 		factor = factor + (factor * 0.25)
 	
 	-- Hyperthermia
-	elseif Util:between(temperature, 34.5, 50) then
-		targetexposure = targetexposure * 1.15
-		factor = factor + (factor * 0.1)
-	elseif temperature > 50 then
+	elseif Util:between(temperature, 30, 40) then
 		targetexposure = targetexposure * 1.25
+		factor = factor + (factor * 0.1)
+	elseif temperature > 40 then
+		targetexposure = targetexposure * 1.55
 		factor = factor + (factor * 0.25)
 	end
 	
