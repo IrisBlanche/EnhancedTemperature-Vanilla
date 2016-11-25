@@ -3,7 +3,7 @@
   "effectConfig" : {
     "tickRate" : 20,
 	"energyCost" : 1,
-    "tickDamage" : 0
+    "healthDamage" : 0
   },
   "defaultDuration" : 3,
   "label" : "Hyperthermia Level 2",
