@@ -31,7 +31,6 @@ end
 
 -- Update
 function update(dt)
-	mcontroller.controlModifiers(self.movementModifiers)
 	if (not status.overConsumeResource("energy", self.energyCost)) and self.healthDamage > 0 then
 		status.applySelfDamageRequest({
 			damageType = "IgnoresDef",

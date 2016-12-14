@@ -34,7 +34,17 @@ function EHT.create()
 	local data = setmetatable({}, EHT)
 	
 	data.config = root.assetJson("/IB_EHT_config/core.config")
-	local configs = { "equip.config", "heatsources.config", "hybridsources.config", "liquids.config", "planetTypes.config", "status.config", "weather.config" }
+	local configs =
+	{
+		"equip.config",
+		"heatsources.config",
+		"hybridsources.config",
+		"liquids.config",
+		"planetTypes.config",
+		"status.config",
+		"weather.config"
+	}
+	
 	for _,config in ipairs(configs) do
 		data.config = sb.jsonMerge(data.config, root.assetJson("/IB_EHT_config/" .. config))
 	end
