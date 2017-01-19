@@ -18,7 +18,7 @@
 			"default" : "player"
 		},
 		"descriptions" : {
-			"showInfo" : "Initialzing status tracker..."
+			"showInfo" : "Initializing status tracker..."
 		},
 		"title" : "^orange;EnhancedTemperature^white;",
 		"text" : "The conditions on planets can be very lethal when it comes to hypothermia and hyperthermia.\n\nI can track my exposure status here.",
