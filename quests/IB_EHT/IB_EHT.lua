@@ -69,20 +69,14 @@ end
 -- Load data
 -- #########################################################################################################
 function loadData()
-	-- EHT storage
+	-- EHT storage load
 	self.EHT = EHT.create()
 	storage.EHT = storage.EHT or { lvlFlag = self.EHT.lvlFlag, offset = self.EHT.offset, hasStarterEffect = self.EHT.hasStarterEffect }
-	if self.EHT.lvlFlag ~= storage.EHT.lvlFlag then
-		self.EHT.lvlFlag = storage.EHT.lvlFlag
-	end
 	
-	if self.EHT.offset ~= storage.EHT.offset then
-		self.EHT.offset = storage.EHT.offset
-	end
-	
-	if self.EHT.hasStarterEffect ~= storage.EHT.hasStarterEffect then
-		self.EHT.hasStarterEffect = storage.EHT.hasStarterEffect
-	end
+	-- Make sure we have the right values
+	self.EHT.lvlFlag = Util:ValCheck(self.EHT.lvlFlag, storage.EHT.lvlFlag)
+	self.EHT.offset = Util:ValCheck(self.EHT.offset, storage.EHT.offset)
+	self.EHT.hasStarterEffect = Util:ValCheck(self.EHT.hasStarterEffect, storage.EHT.hasStarterEffect)
 end
 
 -- #########################################################################################################
