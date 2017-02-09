@@ -61,6 +61,7 @@ function EHT.create()
 	
 	data.offset = 0
 	data.oldid = "NA"
+	data.debug = true
 
 	-- Get planetsizes based on config (patched)
 	data.planetSizes = root.assetJson("/terrestrial_worlds.config:planetSizes")
