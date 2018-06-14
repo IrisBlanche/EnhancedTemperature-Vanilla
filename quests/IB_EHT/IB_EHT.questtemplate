@@ -1,27 +1,30 @@
 {
-	"id" : "IB_EHT",
-	"mainQuest" : true,
-	"invisible" : false,
-	"logOnly" : false,
-	"title" : "---",
-	"text" : "---",
-	"completionText" : "---",
-	"moneyRange" : [ 0, 0 ],
-	"rewards" : [
-		[ ]
+	"id": "IB_EHT",
+	"mainQuest": true,
+	"invisible": false,
+	"logOnly": false,
+	"title": "---",
+	"text": "---",
+	"completionText": "---",
+	"moneyRange": [
+		0,
+		0
 	],
-	"canBeAbandoned" : false,
-	"updateDelta" : 100,
-	"script" : "/quests/IB_EHT/IB_EHT.lua",
-	"scriptConfig" : {
-		"portraits" : {
-			"default" : "player"
+	"rewards": [
+		[]
+	],
+	"canBeAbandoned": false,
+	"updateDelta": 100,
+	"script": "/quests/IB_EHT/IB_EHT.lua",
+	"scriptConfig": {
+		"portraits": {
+			"default": "player"
 		},
-		"descriptions" : {
-			"showInfo" : "Initializing status tracker..."
+		"descriptions": {
+			"showInfo": "Initializing status tracker..."
 		},
-		"title" : "^orange;EnhancedTemperature^white;",
-		"text" : "The conditions on planets can be very lethal when it comes to hypothermia and hyperthermia.\n\nI can track my exposure status here.",
-		"exposureTick" : 2
+		"title": "^orange;EnhancedTemperature^white;",
+		"text": "The conditions on planets can be very lethal when it comes to hypothermia and hyperthermia.\n\nI can track my exposure status here.",
+		"exposureTick": 2
 	}
 }

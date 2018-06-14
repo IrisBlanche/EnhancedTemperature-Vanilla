@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_barren", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_barren",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

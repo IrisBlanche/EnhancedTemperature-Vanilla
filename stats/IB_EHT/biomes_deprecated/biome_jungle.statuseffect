@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_jungle", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_jungle",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

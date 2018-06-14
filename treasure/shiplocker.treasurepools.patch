@@ -1,5 +1,32 @@
 [
-	{ "op": "add", "path": "/starterTreasure/0/1/fill/-", "value": { "item": [ "ib_eht-codex", 1 ] }},
-	{ "op": "add", "path": "/starterTreasure/0/1/fill/-", "value": { "item": [ "ib_eht_starter", 1 ] }},
-	{ "op": "add", "path": "/starterTreasure/0/1/fill/-", "value": { "item": [ "ib_eht_log-codex", 1 ] }}
+	{
+		"op": "add",
+		"path": "/starterTreasure/0/1/fill/-",
+		"value": {
+			"item": [
+				"ib_eht-codex",
+				1
+			]
+		}
+	},
+	{
+		"op": "add",
+		"path": "/starterTreasure/0/1/fill/-",
+		"value": {
+			"item": [
+				"ib_eht_starter",
+				1
+			]
+		}
+	},
+	{
+		"op": "add",
+		"path": "/starterTreasure/0/1/fill/-",
+		"value": {
+			"item": [
+				"ib_eht_log-codex",
+				1
+			]
+		}
+	}
 ]

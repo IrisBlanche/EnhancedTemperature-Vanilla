@@ -1,12 +1,13 @@
 {
-  "itemName" : "ib_eht_starter",
-  "rarity" : "legendary",
-  "inventoryIcon" : "ib_eht_starter.png",
-  "description" : "Activates the EnhancedTemperature systems on pickup!",
-  "shortdescription" : "^green;EHT - Starter^white;",
-  "price" : 0,
-  "category" : "quest",
-
-  "pickupQuestTemplates" : ["IB_EHT"],
-  "consumeOnPickup" : true
+	"itemName": "ib_eht_starter",
+	"rarity": "legendary",
+	"inventoryIcon": "ib_eht_starter.png",
+	"description": "Activates the EnhancedTemperature systems on pickup!",
+	"shortdescription": "^green;EHT - Starter^white;",
+	"price": 0,
+	"category": "quest",
+	"pickupQuestTemplates": [
+		"IB_EHT"
+	],
+	"consumeOnPickup": true
 }

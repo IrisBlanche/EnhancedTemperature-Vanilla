@@ -1,1 +1,6 @@
-[{"op" : "remove", "path" : "/scripts/0"}]
+[
+	{
+		"op": "remove",
+		"path": "/scripts/0"
+	}
+]

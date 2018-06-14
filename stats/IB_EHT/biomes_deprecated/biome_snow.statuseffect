@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_snow", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_snow",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

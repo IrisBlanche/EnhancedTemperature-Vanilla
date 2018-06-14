@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_ocean", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_ocean",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

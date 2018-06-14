@@ -1,8 +1,20 @@
 [
-	{"op" : "add", "path" : "/scripts/-", "value" : "/scripts/IB_EHT/eht_warmth_addon.lua"},
-	{"op" : "add", "path" : "/provideWarmth", "value" : true},
-	{"op" : "add", "path" : "/ehtdata", "value" : {
-		"state" : "light",
-		"value" : "on"
-	}}
+	{
+		"op": "add",
+		"path": "/scripts/-",
+		"value": "/scripts/IB_EHT/eht_warmth_addon.lua"
+	},
+	{
+		"op": "add",
+		"path": "/provideWarmth",
+		"value": true
+	},
+	{
+		"op": "add",
+		"path": "/ehtdata",
+		"value": {
+			"state": "light",
+			"value": "on"
+		}
+	}
 ]

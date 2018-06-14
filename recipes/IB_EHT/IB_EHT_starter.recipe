@@ -1,14 +1,16 @@
 {
-	"input" : [
+	"input": [
 		{
-			"item" : "money",
-			"count" : 1
+			"item": "money",
+			"count": 1
 		}
 	],
-	"output" : {
-		"item" : "ib_eht_starter",
-		"count" : 1
+	"output": {
+		"item": "ib_eht_starter",
+		"count": 1
 	},
-	"duration" : 0.15,
-	"groups" : [ "plain" ]
+	"duration": 0.15,
+	"groups": [
+		"plain"
+	]
 }

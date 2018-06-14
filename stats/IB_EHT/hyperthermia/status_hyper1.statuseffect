@@ -1,12 +1,14 @@
 {
-	"name" : "status_hyper1",
-	"effectConfig" : {
-  		"tickRate" : 20,
-		"energyCost" : 0,
-		"healthDamage" : 0
+	"name": "status_hyper1",
+	"effectConfig": {
+		"tickRate": 20,
+		"energyCost": 0,
+		"healthDamage": 0
 	},
-	"defaultDuration" : 3,
-	"label" : "Hyperthermia Level 1",
-	"icon" : "/interface/statuses/status_hyper1.png",
-	"scripts" : [ "hyperthermia.lua" ]
+	"defaultDuration": 3,
+	"label": "Hyperthermia Level 1",
+	"icon": "/interface/statuses/status_hyper1.png",
+	"scripts": [
+		"hyperthermia.lua"
+	]
 }

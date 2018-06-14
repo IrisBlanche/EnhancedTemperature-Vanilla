@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_midnight", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_midnight",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

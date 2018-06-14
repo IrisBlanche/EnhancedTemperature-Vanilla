@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_desert", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_desert",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

@@ -1,6 +1,6 @@
-{ 
-  "name" : "biome_scorched", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
-} 
+{
+	"name": "biome_scorched",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
+}

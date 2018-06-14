@@ -1,6 +1,6 @@
 {
-	"name" : "IB_EHT_duststorm",
-	"effectConfig" : {},
-	"defaultDuration" : 3,
-	"scripts" : [ ]
+	"name": "IB_EHT_duststorm",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
 }

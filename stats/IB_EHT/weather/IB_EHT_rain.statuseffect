@@ -1,6 +1,6 @@
-{ 
-  "name" : "IB_EHT_rain", 
-  "effectConfig" : {}, 
-  "defaultDuration" : 3, 
-  "scripts" : [ ] 
+{
+	"name": "IB_EHT_rain",
+	"effectConfig": {},
+	"defaultDuration": 3,
+	"scripts": []
 }

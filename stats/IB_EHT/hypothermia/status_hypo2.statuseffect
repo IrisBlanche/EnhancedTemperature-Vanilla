@@ -1,18 +1,18 @@
 {
-  "name" : "status_hypo2",
-  "effectConfig" : {
-    "movementModifiers" : {
-      "speedModifier" : 0.8,
-      "airJumpModifier" : 0.8
-    },
-    "tickRate" : 20,
-    "energyCost" : 1,
-    "healthDamage" : 0
-  },
-  "defaultDuration" : 3,
-  "label" : "Hypothermia Level 2",
-  "icon" : "/interface/statuses/status_hypo2.png",
-  "scripts" : [ "hypothermia.lua" ]
+	"name": "status_hypo2",
+	"effectConfig": {
+		"movementModifiers": {
+			"speedModifier": 0.8,
+			"airJumpModifier": 0.8
+		},
+		"tickRate": 20,
+		"energyCost": 1,
+		"healthDamage": 0
+	},
+	"defaultDuration": 3,
+	"label": "Hypothermia Level 2",
+	"icon": "/interface/statuses/status_hypo2.png",
+	"scripts": [
+		"hypothermia.lua"
+	]
 }
-
-

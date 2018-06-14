@@ -1,16 +1,18 @@
 {
-	"name" : "status_hypo3",
-	"effectConfig" : {
-		"movementModifiers" : {
-			"speedModifier" : 0.6,
-			"airJumpModifier" : 0.6
+	"name": "status_hypo3",
+	"effectConfig": {
+		"movementModifiers": {
+			"speedModifier": 0.6,
+			"airJumpModifier": 0.6
 		},
-		"tickRate" : 20,
-		"energyCost" : 2.5,
-		"healthDamage" : 5
+		"tickRate": 20,
+		"energyCost": 2.5,
+		"healthDamage": 5
 	},
-	"defaultDuration" : 3,
-	"label" : "Hypothermia Level 3",
-	"icon" : "/interface/statuses/status_hypo3.png",
-	"scripts" : [ "hypothermia.lua" ]
+	"defaultDuration": 3,
+	"label": "Hypothermia Level 3",
+	"icon": "/interface/statuses/status_hypo3.png",
+	"scripts": [
+		"hypothermia.lua"
+	]
 }
